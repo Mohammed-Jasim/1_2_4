@@ -23,16 +23,15 @@ time_writer.hideturtle()
 
 #Creation of the maze runner
 mr = trtl.Turtle()
-mr.color("blue")
+colorlist = ['red', 'blue', 'green', 'orange', 'black', 'yellow', 'purple', 'brown', 'gray']
+mr.color(colorlist[rand.randint(1,9)])
+shapelist = ['circle', 'square', 'arrow', 'triangle', 'turtle']
+mr.shape(shapelist[rand.randint(1,5)])
 mr.penup()
 mr.hideturtle()
-mr.back(55)
+mr.goto(-55, 20)
 mr.pendown()
 mr.showturtle()
-
-#Creation of the title
-writer.goto(-190, 320)
-writer.write("Maze Runner", font=("Arial", 34, "bold")) 
 
 #Creation of buttons for the speed of maze runner
 button1 = trtl.Turtle()
@@ -61,16 +60,20 @@ button4.speed(0)
 button4.goto(-600, -250)
 
 ### CREATION OF MAZE
+#Function to make the first 4 walls not drawn
+
 def pen():
-    if walls > 21:  
+    if walls > walls4:  
         maze.penup()
     else:
         maze.pendown()
+#Function to draw the door
 def door(am):
     maze.fd(am-doorcor)
     maze.penup()
     maze.fd(10)
     pen()
+#Function to draw the barrier
 def barrier(am):
     maze.forward(am-barriercor)
     maze.left(90)
@@ -80,7 +83,25 @@ def barrier(am):
 fd = 84
 bd = 42
 path_width = 30
-walls = 25
+diffuculty = input("How difficult would you like the maze to be?(easy, medium, hard, extreme): ")
+if diffuculty == "easy":
+    walls = 15
+    writer.goto(-190, 250)
+    writer.write("Maze Runner", font=("Arial", 34, "bold")) 
+elif diffuculty == "medium":
+    walls = 25
+    writer.goto(-190, 320)
+    writer.write("Maze Runner", font=("Arial", 34, "bold")) 
+elif diffuculty == "hard":
+    writer.goto(-190, 380)
+    writer.write("Maze Runner", font=("Arial", 34, "bold")) 
+    walls = 35
+elif diffuculty == "extreme":
+    walls = 48
+    writer.goto(-190, 480)
+    writer.write("Maze Runner", font=("Arial", 34, "bold")) 
+walls4 = walls - 4
+#Creation of the actual maze
 for i in range(walls):
     pen()
     doorcor = rand.randint(20, fd - bd)
@@ -104,15 +125,16 @@ for i in range(walls):
         bd += 8
         walls -= 1
 
-###Timer
+#Timer
 timer = 0
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
 
+#Timer shown on screen function
 def countdown():
     global timer, timer_up
-    writer.goto(200, 150)
-    time_writer.goto(320, 150)
+    writer.goto(-680, 300)
+    time_writer.goto(-560, 300)
     timer += 1
     writer.write("Timer:", font=("Arial", 25, "bold"))
     time_writer.clear()
