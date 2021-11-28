@@ -24,9 +24,9 @@ time_writer.hideturtle()
 #Creation of the maze runner
 mr = trtl.Turtle()
 colorlist = ['red', 'blue', 'green', 'orange', 'black', 'yellow', 'purple', 'brown', 'gray']
-mr.color(colorlist[rand.randint(1,9)])
+mr.color(colorlist[rand.randint(0,8)])
 shapelist = ['circle', 'square', 'arrow', 'triangle', 'turtle']
-mr.shape(shapelist[rand.randint(1,5)])
+mr.shape(shapelist[rand.randint(0,4)])
 mr.penup()
 mr.hideturtle()
 mr.goto(-55, 20)
